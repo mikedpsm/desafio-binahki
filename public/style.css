@@ -1,35 +1,60 @@
 :root {
-  --primary: crimson;
+  --primary: #f70a39b7;
   --dark: #1f2937;
   --darkdark: #111827;
   --light: #f3f4f6;
+  --blue: #8e42e6;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
-  font-family: "Fira sans", sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+
   background: var(--dark);
   color: var(--light);
 }
 
-.watch {
-  text-align: center;
-  background-color: var(--darkdark);
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 3rem;
   width: 100%;
-  max-width: 360px;
-  margin: 4rem auto;
-  padding: 1rem 2rem;
-  border-radius: 1rem;
+
+  background-color: var(--dark);
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.watch-container {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  background-color: var(--darkdark);
+}
+
+.watch {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  padding: 1rem 1rem;
 }
 
 .time {
-  font-size: 5rem;
-  font-weight: 300;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .controls {
@@ -38,7 +63,8 @@ body {
   justify-content: center;
 }
 
-.controls button {
+.controls button,
+.newTimerBtn {
   appearance: none;
   background: none;
   border: none;
@@ -48,19 +74,31 @@ body {
   cursor: pointer;
 
   color: var(--light);
-  font-size: 1.125rem;
+  font-size: 1rem;
   background-color: var(--primary);
-  margin: 0 0.5rem;
-  padding: 0.5rem 1rem;
+  margin: 0 1rem;
   border-radius: 0.5rem;
+  width: 10rem;
+  max-height: 3rem;
+  height: 1.5rem;
+  text-align: center;
 
   transition: 0.4s;
 }
 
-button:hover {
+#addTimer {
+  margin: 2rem auto;
+  background-color: var(--blue);
+}
+
+#addTimer button:hover {
   opacity: 0.7;
 }
 
-button:active {
+.controls button:hover {
+  opacity: 0.7;
+}
+
+.controls button:active {
   background-color: var(--dark);
 }

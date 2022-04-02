@@ -4,18 +4,37 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stopwatch</title>
+    <title>Time Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Nunito:wght@200;300;400;600;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div class="watch">
-      <div class="time">00:00:00</div>
+    <header><span>Mock - dados do usuário</span></header>
 
-      <div class="controls">
-        <button id="start">Start</button>
-        <button id="stop">Stop</button>
-        <button id="reset">Reset</button>
+    <button type=""button" id="addTimer" class="newTimerBtn">NEW TIMER</button>
+
+    <div class="content-container">
+      <div class="navbar">
+        <span>Aqui é a navbar</span>
+      </div>
+      <div class="watch-container">
+        <div class="watch">
+          <div id="timer1" class="time">00:00:00</div>
+
+          <div class="controls">
+            <button id="start1">START</button>
+            <button id="stop1">STOP</button>
+            <button id="reset1">FINISH</button>
+          </div>
+
+          <button id="close1">X</button>
+        </div>
       </div>
     </div>
   </body>
