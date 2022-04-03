@@ -15,7 +15,10 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <header><span>Mock - dados do usuário</span></header>
+    <header>
+      <a href="index.html"><img src="../../src/assets/binahki-logo.png" alt="Logo da Binahki"></a>
+      <span>Mock - dados do usuário</span>
+    </header>
 
     <button type=""button" id="addTimer" class="newTimerBtn">NEW TIMER</button>
 
@@ -27,13 +30,19 @@
         <div class="watch">
           <div id="timer1" class="time">00:00:00</div>
 
+          <div class="input-container">
+            <label for="idInput" class="hidden">An ID is mandatory!</label>
+            <input type="text" name="Identification" placeholder="ID" id="idInput">
+            <input type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Sample Number #"/>
+          </div>
+
           <div class="controls">
             <button id="start1">START</button>
             <button id="stop1">STOP</button>
             <button id="reset1">FINISH</button>
           </div>
 
-          <button id="close1">X</button>
+          <button class="endTimer" id="close1">X</button>
         </div>
       </div>
     </div>

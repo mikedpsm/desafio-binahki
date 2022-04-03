@@ -1,13 +1,22 @@
 const time_el = document.getElementById("timer1");
+
 const start_btn = document.getElementById("start1");
 const stop_btn = document.getElementById("stop1");
 const reset_btn = document.getElementById("reset1");
-const close_btn = document.
-const watchContainer = document.querySelector(".watch-container");
+const close_btn = document.getElementById("close1");
 const addTimer_btn = document.getElementById("addTimer");
+
+const watchContainer = document.querySelector(".watch-container");
+const idInput = document.getElementById("idInput");
+const label = document.querySelector(".input-container label");
 
 let seconds = 0;
 let interval = null;
+
+const objTimer = {
+  seconds,
+  interval,
+};
 
 // Reference for timer id controllers
 let timerNumber = 2;
@@ -35,8 +44,13 @@ function timer() {
 function start() {
   if (interval) {
     return;
+  } else if (!interval && idInput.textContent === "") {
+    idInput.style.border = "0.2rem solid var(--warning)";
+    label.classList.remove("hidden");
+    return;
   }
 
+  label.classList.add("hidden");
   interval = setInterval(timer, 1000);
 }
 
@@ -51,8 +65,9 @@ function finish() {
   time_el.innerText = "00:00:00";
 }
 
-function close(){
-  
+function close() {
+  stop();
+  seconds = 0;
 }
 
 // Dynamic HTML
@@ -84,7 +99,6 @@ function createTimer() {
   newControls.append(newStopBtn);
   newControls.append(newFinishBtn);
   newControls.append(newCloseBtn);
-
 
   const newTimer = document.createElement("div");
   newTimer.classList.add("watch");
