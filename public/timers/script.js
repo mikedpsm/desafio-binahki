@@ -1,11 +1,9 @@
 const time_el = document.getElementById("timer1");
-
 const start_btn = document.getElementById("start1");
 const stop_btn = document.getElementById("stop1");
 const reset_btn = document.getElementById("reset1");
 const idInput = document.getElementById("idInput1");
 const sampleInput = document.getElementById("sampleInput1");
-
 const addTimer_btn = document.getElementById("addTimer");
 const watchContainer = document.querySelector(".watch-container");
 const label = document.querySelector(".input-container label");
@@ -16,7 +14,6 @@ let startTime;
 let endTime;
 let startDay;
 let endDay;
-
 let timerNumber = 1;
 let gate = false;
 
@@ -45,10 +42,8 @@ function timer() {
 
 function start() {
   if (interval) {
-    console.log("entrou 1");
     return;
   } else if (!interval && idInput.value === "") {
-    console.log("entrou 2");
     alertInput();
     return;
   }
@@ -58,7 +53,6 @@ function start() {
   }
 
   gate = true;
-  console.log(startDay);
   removeAlert();
   interval = setInterval(timer, 1000);
 }
@@ -141,7 +135,7 @@ function createTimer() {
   const newTime = document.createElement("div");
   newTime.classList.add("time");
   newTime.textContent = "00:00:00";
-  newTime.setAttribute("id", `timer${timerNumber}`);
+  newTime.setAttribute("id", `timer${timerNumber + 1}`);
 
   const newForm = document.createElement("form");
 
