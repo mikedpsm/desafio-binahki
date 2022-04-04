@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Time Tracker</title>
+    <link rel="icon" type="image/x-icon" href="./src/assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Nunito:wght@200;300;400;600;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <a href="index.html"
+        ><img src="../../src/assets/binahki-logo.png" alt="Logo da Binahki"
+      /></a>
+      <span>Mock - dados do usuário</span>
+    </header>
+
+    <button type="button" id="addTimer" class="newTimerBtn">NEW TIMER</button>
+
+    <div class="content-container">
+      <div class="navbar">
+        <span>Aqui é a navbar</span>
+      </div>
+
+      <div class="watch-container">
+        <div class="watch">
+          <div id="timer1" class="time">00:00:00</div>
+
+          <div class="controls">
+            <button id="start1">START</button>
+            <button id="stop1">STOP</button>
+            <button id="reset1">FINISH</button>
+          </div>
+
+          <form action="">
+            <div class="input-container">
+              <label for="idInput" class="hidden">An ID is mandatory!</label>
+              <input
+                type="text"
+                name="Identification"
+                placeholder="ID"
+                id="idInput1"
+                required
+              />
+              <input
+                type="number"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                placeholder="Sample Number #"
+                id="sampleInput1"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
