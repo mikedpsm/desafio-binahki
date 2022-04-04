@@ -9,7 +9,7 @@ const addTimer_btn = document.getElementById("addTimer");
 const watchContainer = document.querySelector(".watch-container");
 const label = document.querySelector(".input-container label");
 
-let seconds = 0;
+let seconds = 64790;
 let interval = null;
 
 let timerNumber = 2;
@@ -26,6 +26,10 @@ function timer() {
   if (hrs < 10) hrs = "0" + hrs;
 
   time_el.innerText = `${hrs}:${mins}:${secs}`;
+
+  if (seconds >= 64800) {
+    stop();
+  }
 }
 
 function start() {
@@ -45,7 +49,9 @@ function stop() {
   seconds = 0;
 }
 
-function finish() {}
+function finish() {
+  stop();
+}
 
 /*
   finish: function () {
