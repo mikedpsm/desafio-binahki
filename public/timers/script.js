@@ -4,30 +4,32 @@ const start_btn = document.getElementById("start1");
 const stop_btn = document.getElementById("stop1");
 const reset_btn = document.getElementById("reset1");
 const close_btn = document.getElementById("close1");
-const addTimer_btn = document.getElementById("addTimer");
+const idInput = document.getElementById("idInput1");
 
+const addTimer_btn = document.getElementById("addTimer");
 const watchContainer = document.querySelector(".watch-container");
-const idInput = document.getElementById("idInput");
 const label = document.querySelector(".input-container label");
 
 let seconds = 0;
 let interval = null;
 
-const objTimer = {
-  seconds,
-  interval,
-};
-
 // Reference for timer id controllers
 let timerNumber = 2;
 
-start_btn.addEventListener("click", start);
-stop_btn.addEventListener("click", stop);
-reset_btn.addEventListener("click", finish);
+// Arrays
+const secondsArr = [];
+const intervalArr = [];
 
-addTimer_btn.addEventListener("click", createTimer);
+secondsArr.push(seconds);
+console.log(secondsArr);
 
-function timer() {
+function runInterval() {
+  console.log("run interval");
+  const interval = setInterval(runTimer, 1000);
+  intervalArr.push(interval);
+}
+
+function runTimer() {
   seconds++;
 
   let hrs = Math.floor(seconds / (60 * 60));
@@ -39,40 +41,89 @@ function timer() {
   if (hrs < 10) hrs = "0" + hrs;
 
   time_el.innerText = `${hrs}:${mins}:${secs}`;
+  console.log(secondsArr);
 }
 
-function start() {
-  if (interval) {
-    return;
-  } else if (!interval && idInput.textContent === "") {
-    idInput.style.border = "0.2rem solid var(--warning)";
-    label.classList.remove("hidden");
-    return;
-  }
+const objTimer1 = {
+  id: timerNumber - 1,
+  isRunning: false,
+  interval: function () {
+    console.log("interval rodando");
+    setInterval(this.timer, 1000);
+  },
+  killInterval: function () {
+    clearInterval(this.interval);
+  } /*
+  seconds: 0,
+  timer: function () {
+    console.log("timer");
+    this.seconds++;
 
+    let hrs = Math.floor(this.seconds / (60 * 60));
+    let mins = Math.floor((this.seconds - hrs * 3600) / 60);
+    let secs = this.seconds % 60;
+
+    if (secs < 10) secs = "0" + secs;
+    if (mins < 10) mins = "0" + mins;
+    if (hrs < 10) hrs = "0" + hrs;
+
+    time_el.innerText = `${hrs}:${mins}:${secs}`;
+  },*/,
+  start: function () {
+    if (this.isRunning) {
+      console.log("nao passou");
+      return;
+    } else if (!this.isRunning && idInput.value === "") {
+      alertInput();
+      return;
+    }
+
+    console.log("passou");
+    removeAlert();
+    runInterval();
+    this.isRunning = true;
+  },
+  stop: function () {
+    killInterval();
+    this.isRunning = false;
+    this.interval = null;
+  },
+  finish: function () {
+    if (idInput.value === "") {
+      alertInput();
+    } else {
+      removeAlert();
+      stop();
+      this.seconds = 0;
+      time_el.innerText = "00:00:00";
+    }
+  },
+  delete: function () {
+    this.stop();
+    this.seconds = 0;
+  },
+};
+
+start_btn.addEventListener("click", objTimer1.start);
+stop_btn.addEventListener("click", objTimer1.stop);
+reset_btn.addEventListener("click", objTimer1.finish);
+
+addTimer_btn.addEventListener("click", createTimer);
+
+function alertInput() {
+  idInput.style.border = "0.2rem solid var(--warning)";
+  label.classList.remove("hidden");
+}
+
+function removeAlert() {
+  idInput.style.border = "none";
   label.classList.add("hidden");
-  interval = setInterval(timer, 1000);
-}
-
-function stop() {
-  clearInterval(interval);
-  interval = null;
-}
-
-function finish() {
-  stop();
-  seconds = 0;
-  time_el.innerText = "00:00:00";
-}
-
-function close() {
-  stop();
-  seconds = 0;
 }
 
 // Dynamic HTML
 
 function createTimer() {
+  console.log("criou");
   const newTime = document.createElement("div");
   newTime.classList.add("time");
   newTime.textContent = "00:00:00";
