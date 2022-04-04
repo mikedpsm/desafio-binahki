@@ -35,10 +35,10 @@ const postTimer = async (req, res) => {
   try {
     const newTimer = {
       activity: id,
-      sampleNumber: sample,
-      timeActive: time,
-      startDay,
-      endDay,
+      samplenumber: sample,
+      timeactive: time,
+      startday: startDay,
+      endday: endDay,
     };
 
     await knex("timer").insert(newTimer).returning("*");
