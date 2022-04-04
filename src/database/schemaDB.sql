@@ -6,8 +6,8 @@ CREATE TABLE "timer" (
     activity varchar(60) NOT NULL,
     sampleNumber int default NULL,
   	timeActive bigint NOT NULL,
-    startDay varchar(30) NOT NULL,
-    endDay varchar(30) NOT NULL
+    startDay varchar(70) NOT NULL,
+    endDay varchar(70) NOT NULL
     /* user_id int NOT NULL,
     FOREIGN KEY (user_id) references timeruser (id) */
 );

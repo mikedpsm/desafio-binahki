@@ -85,20 +85,15 @@ async function uploadTimer(time, id, sample, startDay, endDay) {
     };
     console.log(1);
 
-    const response = await fetch(
-      "https://timer-binahki.herokuapp.com/api/timer",
-      {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    );
+    await fetch("https://timer-binahki.herokuapp.com/api/timer", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
     console.log("deu");
-
-    await response;
   } catch (error) {
     console.log(error.message);
   }
