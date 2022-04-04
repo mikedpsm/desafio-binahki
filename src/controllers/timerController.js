@@ -4,22 +4,23 @@ const getDailyProd = async (req, res) => {
   try {
     return res.status(200).json({});
   } catch (error) {
-    console.log(error.message);
+    return res.status(400).json({ error: error.message });
   }
 };
 const getWeekTimer = async (req, res) => {
   try {
     return res.status(200).json({});
   } catch (error) {
-    console.log(error.message);
+    return res.status(400).json({ error: error.message });
   }
 };
 
 const getTimers = async (req, res) => {
   try {
-    return res.status(200).json({});
+    const timersQuery = await knex("timer");
+    return res.status(200).json(timersQuery);
   } catch (error) {
-    console.log(error.message);
+    return res.status(400).json({ error: error.message });
   }
 };
 
@@ -59,7 +60,7 @@ const deleteTimer = async (req, res) => {
   try {
     return res.status(200).json({});
   } catch (error) {
-    console.log(error.message);
+    return res.status(400).json({ error: error.message });
   }
 };
 

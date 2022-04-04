@@ -12,4 +12,6 @@ const knex = require("knex")({
   },
 });
 
+//connectionString: process.env.DATABASE_URL || 'postgresql://postgres:@localhost:5000/', ssl: process.env.DATABASE_URL ? true : false
+
 module.exports = knex;
