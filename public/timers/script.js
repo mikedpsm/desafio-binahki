@@ -4,15 +4,26 @@ const start_btn = document.getElementById("start1");
 const stop_btn = document.getElementById("stop1");
 const reset_btn = document.getElementById("reset1");
 const idInput = document.getElementById("idInput1");
+const sampleInput = document.getElementById("sampleInput1");
 
 const addTimer_btn = document.getElementById("addTimer");
 const watchContainer = document.querySelector(".watch-container");
 const label = document.querySelector(".input-container label");
 
-let seconds = 64790;
+let seconds = 0;
 let interval = null;
+let startTime;
+let endTime;
+let startDay;
+let endDay;
 
-let timerNumber = 2;
+let timerNumber = 1;
+let gate = false;
+
+function clearFields() {
+  idInput.value = "";
+  sampleInput.value = "";
+}
 
 function timer() {
   seconds++;
@@ -34,23 +45,61 @@ function timer() {
 
 function start() {
   if (interval) {
+    console.log("entrou 1");
     return;
   } else if (!interval && idInput.value === "") {
+    console.log("entrou 2");
     alertInput();
     return;
   }
 
+  if (gate === false) {
+    startDay = new Date(Date.now());
+  }
+
+  gate = true;
+  console.log(startDay);
   removeAlert();
   interval = setInterval(timer, 1000);
 }
 
 function stop() {
   clearInterval(interval);
-  seconds = 0;
+  interval = null;
 }
 
 function finish() {
+  if (seconds === 0) {
+    return;
+  }
+
+  endDay = new Date(Date.now());
+
+  gate = false;
   stop();
+  uploadTimer(seconds, idInput.value, sampleInput.value);
+}
+
+async function uploadTimer(time, id, sample) {
+  try {
+    const data = {
+      time,
+      id,
+      sample,
+    };
+
+    const response = await fetch("http://localhost:5000/timer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    await response.json();
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 /*
@@ -134,7 +183,7 @@ function createTimer() {
 
   timerNumber++;
 
-  if (timerNumber < 11) {
+  if (timerNumber < 10) {
     addTimer_btn.disabled = false;
   } else {
     addTimer_btn.disabled = true;
