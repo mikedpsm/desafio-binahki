@@ -32,15 +32,15 @@ const postTimer = async (req, res) => {
     });
   }
 
-  const newTimer = {
-    activity: id,
-    sampleNumber: sample,
-    timeActive: time,
-    startDay,
-    endDay,
-  };
-
   try {
+    const newTimer = {
+      activity: id,
+      sampleNumber: sample,
+      timeActive: time,
+      startDay,
+      endDay,
+    };
+
     await knex("timer").insert(newTimer).returning("*");
     return res.status(201).json({ message: "New timer saved." });
   } catch (error) {
