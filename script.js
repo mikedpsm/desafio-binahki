@@ -1,3 +1,4 @@
+const axios = require("axios");
 const time_el = document.getElementById("timer1");
 const start_btn = document.getElementById("start1");
 const stop_btn = document.getElementById("stop1");
@@ -8,10 +9,18 @@ const addTimer_btn = document.getElementById("addTimer");
 const watchContainer = document.querySelector(".watch-container");
 const label = document.querySelector(".input-container label");
 
+const api = axios.create({
+  baseURL: "https://timer-binahki.herokuapp.com/",
+  headers: {
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Allow-Headers":
+      "Origin,X-Requested-With,Content-Type,Accept, auth-token, access-control-allow-origin",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS",
+  },
+});
+
 let seconds = 0;
 let interval = null;
-let startTime;
-let endTime;
 let startDay;
 let endDay;
 let timerNumber = 1;
@@ -73,6 +82,7 @@ function finish() {
   stop();
   uploadTimer(seconds, idInput.value, sampleInput.value, startDay, endDay);
   console.log(seconds, idInput.value, sampleInput.value, startDay, endDay);
+  clearFields();
 }
 
 async function uploadTimer(time, id, sample, startDay, endDay) {
@@ -85,20 +95,17 @@ async function uploadTimer(time, id, sample, startDay, endDay) {
       endDay,
     };
     console.log(1);
-    const response = await fetch("http://localhost:5000/timer", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    console.log(1);
 
-    const responseData = await response;
-    console.log(responseData);
+    // const response = await fetch("http://localhost:5000/timer", {
+    //   method: "POST",
+    //   mode: "cors",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(data),
+    // });
 
-    return responseData;
+    return api.post("/timer", data);
   } catch (error) {
     console.log(error.message);
   }
