@@ -72,6 +72,7 @@ function finish() {
   gate = false;
   stop();
   uploadTimer(seconds, idInput.value, sampleInput.value, startDay, endDay);
+  console.log(seconds, idInput.value, sampleInput.value, startDay, endDay);
 }
 
 async function uploadTimer(time, id, sample, startDay, endDay) {
@@ -83,38 +84,26 @@ async function uploadTimer(time, id, sample, startDay, endDay) {
       startDay,
       endDay,
     };
-
+    console.log(1);
     const response = await fetch("http://localhost:5000/timer", {
       method: "POST",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
+    console.log(1);
 
-    await response.json();
+    const responseData = await response;
+    console.log(responseData);
+
+    return responseData;
   } catch (error) {
     console.log(error.message);
   }
 }
 
-/*
-  finish: function () {
-    if (idInput.value === "") {
-      alertInput();
-    } else {
-      removeAlert();
-      stop();
-      this.seconds = 0;
-      time_el.innerText = "00:00:00";
-    }
-  },
-  delete: function () {
-    this.stop();
-    this.seconds = 0;
-  },
-};
-*/
 start_btn.addEventListener("click", start);
 stop_btn.addEventListener("click", stop);
 reset_btn.addEventListener("click", finish);
