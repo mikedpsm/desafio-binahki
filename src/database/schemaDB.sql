@@ -5,9 +5,7 @@ CREATE TABLE "timer" (
 	id serial PRIMARY KEY,
     activity varchar(60) NOT NULL,
     sampleNumber int default NULL,
-    startTime varchar(30) NOT NULL,
-    endTime varchar(30) NOT NULL,
-    pauses varchar(120) default NULL,
+  	timeActive bigint NOT NULL,
     startDay varchar(30) NOT NULL,
     endDay varchar(30) NOT NULL
     /* user_id int NOT NULL,

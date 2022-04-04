@@ -49,7 +49,7 @@ function start() {
   }
 
   if (gate === false) {
-    startDay = new Date(Date.now());
+    startDay = new Date(Date.now()).toString();
   }
 
   gate = true;
@@ -67,19 +67,21 @@ function finish() {
     return;
   }
 
-  endDay = new Date(Date.now());
+  endDay = new Date(Date.now()).toString();
 
   gate = false;
   stop();
-  uploadTimer(seconds, idInput.value, sampleInput.value);
+  uploadTimer(seconds, idInput.value, sampleInput.value, startDay, endDay);
 }
 
-async function uploadTimer(time, id, sample) {
+async function uploadTimer(time, id, sample, startDay, endDay) {
   try {
     const data = {
       time,
       id,
       sample,
+      startDay,
+      endDay,
     };
 
     const response = await fetch("http://localhost:5000/timer", {
