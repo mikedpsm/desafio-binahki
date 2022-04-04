@@ -7,6 +7,7 @@ const getDailyProd = async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 };
+
 const getWeekTimer = async (req, res) => {
   try {
     return res.status(200).json({});
@@ -56,6 +57,7 @@ const patchTimer = async (req, res) => {
     console.log(error.message);
   }
 };
+
 const deleteTimer = async (req, res) => {
   try {
     return res.status(200).json({});

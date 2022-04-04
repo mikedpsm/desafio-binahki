@@ -70,8 +70,8 @@ function finish() {
   gate = false;
   stop();
   uploadTimer(seconds, idInput.value, sampleInput.value, startDay, endDay);
-  console.log(seconds, idInput.value, sampleInput.value, startDay, endDay);
   clearFields();
+  seconds = 0;
 }
 
 async function uploadTimer(time, id, sample, startDay, endDay) {
@@ -83,7 +83,6 @@ async function uploadTimer(time, id, sample, startDay, endDay) {
       startDay,
       endDay,
     };
-    console.log(1);
 
     await fetch("https://timer-binahki.herokuapp.com/api/timer", {
       method: "POST",
@@ -93,7 +92,6 @@ async function uploadTimer(time, id, sample, startDay, endDay) {
       },
       body: JSON.stringify(data),
     });
-    console.log("deu");
   } catch (error) {
     console.log(error.message);
   }
@@ -114,8 +112,6 @@ function removeAlert() {
   idInput.style.border = "none";
   label.classList.add("hidden");
 }
-
-// Dynamic HTML
 
 function createTimer() {
   const newTime = document.createElement("div");
