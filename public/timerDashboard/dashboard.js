@@ -1,3 +1,5 @@
+let responseJson;
+
 async function loadDashboard() {
   try {
     const response = await fetch(
@@ -7,7 +9,10 @@ async function loadDashboard() {
         mode: "cors",
       }
     );
-    const responseJson = await response.json();
+    responseJson = await response.json();
+
+    // id activity samplenumber startday endday timeactive
+    responseJson.map((x) => {});
     console.log(responseJson);
   } catch (error) {
     return error.message;
@@ -15,3 +20,12 @@ async function loadDashboard() {
 }
 
 loadDashboard();
+
+function createDiv(span) {
+  const newDiv = document.createElement("div");
+  newDiv.classList.add("timer-div");
+}
+
+function createSpan(text) {
+  const newP = document.createElement("p");
+}
