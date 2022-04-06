@@ -37,7 +37,7 @@ const postTimer = async (req, res) => {
   try {
     const newTimer = {
       activity: id,
-      samplenumber: sample,
+      samplenumber: !sample ? "" : sample,
       timeactive: time,
       startday: startDay,
       endday: endDay,
