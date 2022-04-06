@@ -59,8 +59,11 @@ const patchTimer = async (req, res) => {
 };
 
 const deleteTimer = async (req, res) => {
+  const { id } = req.body;
+
   try {
-    return res.status(200).json({});
+    const deleteQuery = await knex("timer").where({ id }).del();
+    return res.status(200).json({ deleteQuery });
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
