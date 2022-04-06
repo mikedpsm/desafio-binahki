@@ -1,6 +1,6 @@
-let responseJson;
+const container = document.querySelector(".timers-container");
 
-async function loadDashboard() {
+const loadDashboard = async function () {
   try {
     const response = await fetch(
       "https://timer-binahki.herokuapp.com/api/timer",
@@ -9,23 +9,25 @@ async function loadDashboard() {
         mode: "cors",
       }
     );
-    responseJson = await response.json();
+    const responseJson = await response.json();
 
-    // id activity samplenumber startday endday timeactive
-    responseJson.map((x) => {});
-    console.log(responseJson);
+    //id activity samplenumber startday endday timeactive
+    const timers = responseJson.map(
+      ({ activity, samplenumber, startday, endday, timeactive }) => `
+        <div class="timer-div">
+            <span>${activity}</span>    
+            <span>#${samplenumber == null ? "" : samplenumber}</span>    
+            <span>ID: ${startday}</span>    
+            <span>ID: ${endday}</span>    
+            <span>ID: ${timeactive}</span>    
+        </div>
+    `
+    );
+
+    container.innerHTML += timers;
   } catch (error) {
     return error.message;
   }
-}
+};
 
 loadDashboard();
-
-function createDiv(span) {
-  const newDiv = document.createElement("div");
-  newDiv.classList.add("timer-div");
-}
-
-function createSpan(text) {
-  const newP = document.createElement("p");
-}
