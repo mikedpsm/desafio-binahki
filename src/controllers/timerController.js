@@ -26,8 +26,7 @@ const getTimers = async (req, res) => {
 };
 
 const postTimer = async (req, res) => {
-  const { time, id, startDay, endDay } = req.body;
-  let { sample } = req.body;
+  const { time, id, startDay, endDay, sample } = req.body;
 
   if (!time || !id) {
     return res.status(400).json({
@@ -52,8 +51,21 @@ const postTimer = async (req, res) => {
 };
 
 const patchTimer = async (req, res) => {
+  const { time, id, startDay, endDay, sample } = req.body;
+
+  if(!time){
+    return res.status(400).json({message: "Time input is mandatory."});
+  }
+
   try {
-    return res.status(200).json({});
+    const updateTimer = await knex("timer").where({id}).update({
+      activity: id,
+      samplenumber: sample,
+      timeactive: time,
+      startday: startDay,
+      endday: endDay,
+    });
+    return res.status(200).json("Timer updated.");
   } catch (error) {
     console.log(error.message);
   }
