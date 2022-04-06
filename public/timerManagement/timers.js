@@ -54,9 +54,13 @@ const loadDashboard = async function () {
                 : Math.floor(timeactive / (60 * 60))
                     .toString()
                     .padStart(2, "0")
-            }:${timeactive - ((timeactive / (60 * 60)) * 3600) / 60}:${
-            timeactive % 60
-          } hours</span>
+            }:${
+              Math.floor((timeactive - ((Math.floor(timeactive / (60 * 60))) * 60)) / 60)
+            .toString()
+            .padStart(2, "0")}:${
+              Math.floor(timeactive % 60)
+            .toString()
+            .padStart(2, "0")} hours</span>
         </div>
     `
       )

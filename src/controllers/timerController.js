@@ -35,10 +35,6 @@ const postTimer = async (req, res) => {
     });
   }
 
-  if (!sample) {
-    sample = null;
-  }
-
   try {
     const newTimer = {
       activity: id,

@@ -8,7 +8,7 @@ const addTimer_btn = document.getElementById("addTimer");
 const watchContainer = document.querySelector(".watch-container");
 const label = document.querySelector(".input-container label");
 
-let seconds = 0;
+let seconds = 7000;
 let interval = null;
 let startDay;
 let endDay;
