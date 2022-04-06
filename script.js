@@ -10,8 +10,6 @@ const label = document.querySelector(".input-container label");
 
 let seconds = 0;
 let interval = null;
-let startTime;
-let endTime;
 let startDay;
 let endDay;
 let timerNumber = 1;
@@ -43,7 +41,7 @@ function timer() {
 function start() {
   if (interval) {
     return;
-  } else if (!interval && idInput.value === "") {
+  } else if (!interval && idInput.value.trim() === "") {
     alertInput();
     return;
   }
@@ -72,6 +70,8 @@ function finish() {
   gate = false;
   stop();
   uploadTimer(seconds, idInput.value, sampleInput.value, startDay, endDay);
+  clearFields();
+  seconds = 0;
 }
 
 async function uploadTimer(time, id, sample, startDay, endDay) {
@@ -84,37 +84,20 @@ async function uploadTimer(time, id, sample, startDay, endDay) {
       endDay,
     };
 
-    const response = await fetch("http://localhost:5000/timer", {
+    await fetch("https://timer-binahki.herokuapp.com/api/timer", {
       method: "POST",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(data),
     });
-
-    await response.json();
   } catch (error) {
     console.log(error.message);
   }
 }
 
-/*
-  finish: function () {
-    if (idInput.value === "") {
-      alertInput();
-    } else {
-      removeAlert();
-      stop();
-      this.seconds = 0;
-      time_el.innerText = "00:00:00";
-    }
-  },
-  delete: function () {
-    this.stop();
-    this.seconds = 0;
-  },
-};
-*/
 start_btn.addEventListener("click", start);
 stop_btn.addEventListener("click", stop);
 reset_btn.addEventListener("click", finish);
@@ -130,8 +113,6 @@ function removeAlert() {
   idInput.style.border = "none";
   label.classList.add("hidden");
 }
-
-// Dynamic HTML
 
 function createTimer() {
   const newTime = document.createElement("div");
