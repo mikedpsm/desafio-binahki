@@ -67,11 +67,11 @@ function finish() {
 
   endDay = new Date(Date.now()).toString();
 
+  seconds = 0;
   gate = false;
   stop();
   uploadTimer(seconds, idInput.value, sampleInput.value, startDay, endDay);
   clearFields();
-  seconds = 0;
 }
 
 async function uploadTimer(time, id, sample, startDay, endDay) {
