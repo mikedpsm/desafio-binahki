@@ -19,34 +19,44 @@ const loadDashboard = async function () {
         <div class="timer-div">
             <span>ID: ${id}</span>    
             <span>Name: ${activity}</span>    
-            <span>#${samplenumber == null ? "" : samplenumber}</span>    
+            <span>Sample number: ${
+              samplenumber == null ? "" : samplenumber
+            }</span>    
             <span>Session start: ${
               new Date(startday).getDate() < 10
                 ? new Date(startday).getDate().toString().padStart(2, "0")
                 : new Date(startday).getDate()
             }/${
-            new Date(startday).getMonth() < 10
-              ? new Date(startday).getMonth().toString().padStart(2, "0")
-              : new Date(startday).getMonth()
+            new Date(startday).getMonth() + 1 <= 9
+              ? (new Date(startday).getMonth() + 1).toString().padStart(2, "0")
+              : new Date(startday).getMonth() + 1
           }/${
             new Date(startday).getFullYear() < 10
               ? new Date(startday).getFullYear().toString()
               : new Date(startday).getFullYear()
-          }</span>    
+          }</span>
             <span>Session end: ${
               new Date(endday).getDate() < 10
                 ? new Date(endday).getDate().toString().padStart(2, "0")
                 : new Date(endday).getDate()
             }/${
-            new Date(endday).getMonth() < 10
-              ? new Date(endday).getMonth().toString().padStart(2, "0")
-              : new Date(endday).getMonth()
+            new Date(endday).getMonth() + 1 <= 9
+              ? (new Date(endday).getMonth() + 1).toString().padStart(2, "0")
+              : new Date(endday).getMonth() + 1
           }/${
             new Date(endday).getFullYear() < 10
               ? new Date(endday).getFullYear().toString()
               : new Date(endday).getFullYear()
-          }</span>    
-            <span>Time active: ${(timeactive / 60 / 60).toFixed(2)} hours</span>
+          }</span>
+            <span>Time active: ${
+              Math.floor(timeactive / (60 * 60)) > 9
+                ? Math.floor(timeactive / (60 * 60))
+                : Math.floor(timeactive / (60 * 60))
+                    .toString()
+                    .padStart(2, "0")
+            }:${timeactive - ((timeactive / (60 * 60)) * 3600) / 60}:${
+            timeactive % 60
+          } hours</span>
         </div>
     `
       )

@@ -43,8 +43,8 @@ const postTimer = async (req, res) => {
       endday: endDay,
     };
 
-    await knex("timer").insert(newTimer).returning("*");
-    return res.status(201).json({ message: "New timer saved." });
+    await knex("timer").insert(newTimer);
+    return res.status(201).json({ message: "New timer saved.", newTimer });
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }
