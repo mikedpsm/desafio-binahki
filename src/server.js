@@ -10,6 +10,4 @@ server.use(cors());
 server.use(express.json());
 server.use("/api", router);
 
-console.log(process.env.DB_PASSWORD);
-
 module.exports = server;

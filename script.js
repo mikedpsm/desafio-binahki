@@ -41,7 +41,7 @@ function timer() {
 function start() {
   if (interval) {
     return;
-  } else if (!interval && idInput.value === "") {
+  } else if (!interval && idInput.value.trim() === "") {
     alertInput();
     return;
   }

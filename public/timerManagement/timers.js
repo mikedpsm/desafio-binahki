@@ -69,8 +69,3 @@ const loadDashboard = async function () {
 };
 
 loadDashboard();
-
-const teste = new Date(3);
-console.log(teste);
-
-const formatDate = (text) => {};

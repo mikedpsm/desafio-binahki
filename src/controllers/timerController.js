@@ -26,7 +26,8 @@ const getTimers = async (req, res) => {
 };
 
 const postTimer = async (req, res) => {
-  const { time, id, sample, startDay, endDay } = req.body;
+  const { time, id, startDay, endDay } = req.body;
+  let { sample } = req.body;
 
   if (!time || !id) {
     return res.status(400).json({
@@ -34,10 +35,14 @@ const postTimer = async (req, res) => {
     });
   }
 
+  if (!sample) {
+    sample = null;
+  }
+
   try {
     const newTimer = {
       activity: id,
-      samplenumber: !sample ? "" : sample,
+      samplenumber: sample,
       timeactive: time,
       startday: startDay,
       endday: endDay,
