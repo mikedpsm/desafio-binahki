@@ -58,7 +58,7 @@ const patchTimer = async (req, res) => {
   }
 
   try {
-    const updateTimer = await knex("timer").where({id}).update({
+    await knex("timer").where({id}).update({
       activity: id,
       samplenumber: sample,
       timeactive: time,
